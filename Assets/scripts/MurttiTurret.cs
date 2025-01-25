@@ -1,13 +1,13 @@
-using System;
-using TMPro;
 using UnityEngine;
 
-public class BasicTurret : TurrentBase
+public class MurttiTurret : TurrentBase
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float colliderRadius = 10;
     [SerializeField] private Collider2D[] colliders;
     [SerializeField] private int damage;
+    [SerializeField] private int MurttiConut;
+    [SerializeField] private int[] MurttiLevel;
     
     
     private bool isFiring = false;
@@ -20,8 +20,13 @@ public class BasicTurret : TurrentBase
         {
             if (colliders.Length > 0)
             {
-                firing(bulletPrefab, colliders[0], damage);
-                isFiring = true;
+                firing(bulletPrefab, colliders[Random.Range(0, colliders.Length)], damage);
+                MurttiConut++;
+                if(MurttiConut == MurttiLevel[level-1])
+                {
+                    isFiring = true;
+                    MurttiConut = 0;
+                }
             }
         }
 

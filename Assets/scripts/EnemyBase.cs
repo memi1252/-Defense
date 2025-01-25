@@ -11,6 +11,7 @@ public class EnemyBase : MonoBehaviour
     public float speed;
     public float defaultSpeed;
     public bool speedUp = false;
+    public bool speedDown = false;
     
 
     public virtual void SpeedUpTimer()
@@ -19,7 +20,13 @@ public class EnemyBase : MonoBehaviour
         {
             StartCoroutine(SpeedUp());
         }
+
+        if (speedDown)
+        {
+            StartCoroutine(SpeedDown());
+        }
     }
+    
 
     public virtual void road(Transform[] targetWay)
     {
@@ -51,11 +58,72 @@ public class EnemyBase : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Ammo")
+        if(other.gameObject.CompareTag("Ammo"))
         {
-            Ammo ammo = other.gameObject.GetComponent<Ammo>();
+            //Ammo ammo = other.gameObject.GetComponent<Ammo>();
+            //TakeDamage(ammo.damage);
+            //Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("SpeedDownAmmo"))
+        {
+            SpeedDownAmmo ammo = other.gameObject.GetComponent<SpeedDownAmmo>();
             TakeDamage(ammo.damage);
-            Destroy(other.gameObject);
+            if (this.GetComponent<Enemy1>())
+            {
+                if (ammo.speedDownpercent == 10)
+                {
+                    speed = 0.0045f;
+                }else if (ammo.speedDownpercent == 20)
+                {
+                    speed = 0.004f;
+                }
+                else if (ammo.speedDownpercent == 30)
+                {
+                    speed = 0.0035f;
+                }
+            }
+            else if (this.GetComponent<Enemy2>())
+            {
+                if (ammo.speedDownpercent == 10)
+                {
+                    speed = 0.0036f;
+                }else if (ammo.speedDownpercent == 20)
+                {
+                    speed = 0.0032f;
+                }
+                else if (ammo.speedDownpercent == 30)
+                {
+                    speed = 0.0028f;
+                }
+            }else if (GetComponent<Enemy3>())
+            {
+                if (ammo.speedDownpercent == 10)
+                {
+                    speed = 0.0018f;
+                }else if (ammo.speedDownpercent == 20)
+                {
+                    speed = 0.0016f;
+                }
+                else if (ammo.speedDownpercent == 30)
+                {
+                    speed = 0.0014f;
+                }
+            }else if (GetComponent<Enemy4>())
+            {
+                if (ammo.speedDownpercent == 10)
+                {
+                    speed = 0.0027f;
+                }else if (ammo.speedDownpercent == 20)
+                {
+                    speed = 0.0024f;
+                }
+                else if (ammo.speedDownpercent == 30)
+                {
+                    speed = 0.0021f;
+                }
+            }
+            speedDown = true;
+            Destroy(ammo.gameObject);
         }
     }
     
@@ -64,5 +132,12 @@ public class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(5);
         speed = defaultSpeed;
         speedUp = false;
+    }
+    
+    IEnumerator SpeedDown()
+    {
+        yield return new WaitForSeconds(5);
+        speed = defaultSpeed;
+        speedDown = false;
     }
 }

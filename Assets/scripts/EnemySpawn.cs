@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(spawnEnemy());
+        //StartCoroutine(spawnEnemy());
     }
     IEnumerator spawnEnemy()
     {
@@ -30,5 +30,12 @@ public class EnemySpawn : MonoBehaviour
         yield return new WaitForSeconds(spawnTimer);
         StartCoroutine(spawnEnemy());
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //StartCoroutine(spawnEnemy());
+        }
+    }
 }

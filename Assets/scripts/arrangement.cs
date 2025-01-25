@@ -11,7 +11,13 @@ public class arrangement : MonoBehaviour
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null)
             {
-                Debug.Log(hit.collider.gameObject.name);
+                if (hit.collider.CompareTag("TurretPoint") && !UIManger.Instance.arrangementUI.isShow)
+                {
+                    UIManger.Instance.arrangementUI.Show();
+                    UIManger.Instance.arrangementUI.spawnTransform = hit.collider.transform;
+                    UIManger.Instance.arrangementUI.clickGameObject = hit.collider.gameObject;
+                    UIManger.Instance.arrangementUI.isShow = true;
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3131710633447975780}
   - component: {fileID: 2347596647270137935}
   - component: {fileID: 8580316316171246711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -175,10 +175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f382b2e7d34b13f46b322ca3afe93357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
-  gold: 10
+  health: 16
+  gold: 5
   speed: 0.004
   defaultSpeed: 0
   speedUp: 0
+  speedDown: 0
   colliders: []
   colliderRadius: 2

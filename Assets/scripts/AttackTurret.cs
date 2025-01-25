@@ -1,13 +1,14 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-public class BasicTurret : TurrentBase
+public class AttackTurret : TurrentBase
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float colliderRadius = 10;
     [SerializeField] private Collider2D[] colliders;
     [SerializeField] private int damage;
+    [SerializeField] private int[] RangeLevel;
+    [SerializeField] private TextMeshPro RangeText;
     
     
     private bool isFiring = false;
@@ -38,6 +39,7 @@ public class BasicTurret : TurrentBase
         {
             damage =damages[0];
             price = Prices[1];
+            colliderRadius = RangeLevel[0];
             goldText.text = "Gold: "+ Prices[1];
             damageText.text = "Damage: " + damages[1];
             delayText.text = "Delay: " + fireLevelTimer[1];
@@ -46,6 +48,7 @@ public class BasicTurret : TurrentBase
         {
             damage = damages[1];
             price = Prices[2];
+            colliderRadius = RangeLevel[1];
             goldText.text = "Gold: " + Prices[2];
             damageText.text = "Damage: " + damages[2];
             delayText.text = "Delay: " + fireLevelTimer[2];
@@ -53,9 +56,11 @@ public class BasicTurret : TurrentBase
         else if(level == 3)
         {
             damage = damages[2];
+            colliderRadius = RangeLevel[2];
             goldText.gameObject.SetActive(false);
             damageText.gameObject.SetActive(false);
             delayText.gameObject.SetActive(false);
+            RangeText.gameObject.SetActive(false);
             UpgradeWindow.SetActive(false);
         }
     }

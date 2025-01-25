@@ -1,19 +1,7 @@
 using UnityEngine;
 
-public class UIManger : MonoBehaviour
+public class UIManger : MonoSingleton<UIManger>
 {
-    public static UIManger Instance {get; private set;}
-    
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    [SerializeField] public arrangementUI arrangementUI;
+    [SerializeField] public StatsUI statsUI;
 }
