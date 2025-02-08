@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] private GameObject[] items;
+    
     private int currentWaypointIndex = 0;
     private float progress = 0f;
     public int health;
@@ -12,6 +16,7 @@ public class EnemyBase : MonoBehaviour
     public float defaultSpeed;
     public bool speedUp = false;
     public bool speedDown = false;
+    public bool goldUp = false;
     
 
     public virtual void SpeedUpTimer()
@@ -37,6 +42,18 @@ public class EnemyBase : MonoBehaviour
         if (progress >= 1f) 
         {
             progress = 0f; 
+             if(targetWay == GameManager.Instance.MapPos1 && targetWaypoint ==targetWay[0])
+                transform.Rotate(0, 0, -90);
+             else if(targetWay == GameManager.Instance.MapPos1 && targetWaypoint ==targetWay[targetWay.Length-2])
+                 transform.rotation = Quaternion.Euler(0, 0, 90);
+             else if(targetWay == GameManager.Instance.MapPos1)
+                transform.Rotate(0, 0, 90);
+             else if(targetWay == GameManager.Instance.MapPos2 && targetWaypoint ==targetWay[0])
+                 transform.Rotate(0, 0, 90);
+             else if(targetWay == GameManager.Instance.MapPos2 && targetWaypoint ==targetWay[targetWay.Length-2])
+                 transform.rotation = Quaternion.Euler(0, 0, 90);
+             else if(targetWay == GameManager.Instance.MapPos2)
+                transform.Rotate(0, 0, -90);
             currentWaypointIndex = (currentWaypointIndex + 1) % targetWay.Length;
         }
     }
@@ -44,26 +61,22 @@ public class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         health -= damage;
-        if(health <= 0)
-        {
-            Die();
-        }
     }
     
     public virtual void Die()
     {
         GameManager.Instance.gold += gold;
+        GameManager.Instance.EnemyList.Remove(gameObject);
+        GameObject item = items[Random.Range(0, items.Length)];
+        if (item != null)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.CompareTag("Ammo"))
-        {
-            //Ammo ammo = other.gameObject.GetComponent<Ammo>();
-            //TakeDamage(ammo.damage);
-            //Destroy(other.gameObject);
-        }
         if (other.gameObject.CompareTag("SpeedDownAmmo"))
         {
             SpeedDownAmmo ammo = other.gameObject.GetComponent<SpeedDownAmmo>();
@@ -125,6 +138,8 @@ public class EnemyBase : MonoBehaviour
             speedDown = true;
             Destroy(ammo.gameObject);
         }
+
+        
     }
     
     IEnumerator SpeedUp()

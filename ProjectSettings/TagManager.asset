@@ -10,6 +10,10 @@ TagManager:
   - TurretPoint
   - heal
   - AllDamegi
+  - Projectile
+  - GoldUp
+  - EnemyStop
+  - 'Warehouse '
   layers:
   - Default
   - TransparentFX

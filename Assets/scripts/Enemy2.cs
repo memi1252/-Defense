@@ -54,13 +54,19 @@ public class Enemy2 : EnemyBase
             }
             
         }
-        road(GameManager.Instance.MapPos1);
-        if(transform.position == GameManager.Instance.MapPos1[GameManager.Instance.MapPos1.Length - 1].position)
+        if (GameManager.Instance.stage2)
         {
-            GameManager.Instance.protecthealth -= 1;
-            Destroy(gameObject);
+            road(GameManager.Instance.stage2MapPos1);
+        }
+        else
+        {
+            road(GameManager.Instance.MapPos1);
         }
         SpeedUpTimer();
+        if(health <= 0)
+        {
+            Die();
+        }
     }
     
     private void OnDrawGizmos()

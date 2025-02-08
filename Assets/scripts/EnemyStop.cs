@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public class EnemyStop : itemBase
+{
+    private void Update()
+    {
+        click("EnemyStop");
+    }
+    
+    public override void item()
+    {
+        Debug.Log("EnemyStop");
+        GameManager.Instance.speedStop = true;
+        Destroy(gameObject);
+    }
+}
+

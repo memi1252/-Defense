@@ -21,6 +21,9 @@ public class AttackTurret : TurrentBase
         {
             if (colliders.Length > 0)
             {
+                Vector3 direction = colliders[0].transform.position - transform.GetChild(1).position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.GetChild(1).rotation = Quaternion.Euler(new Vector3(0, 0, angle-90));
                 firing(bulletPrefab, colliders[0], damage);
                 isFiring = true;
             }

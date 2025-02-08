@@ -21,18 +21,26 @@ public class Enemy1 : EnemyBase{
             StartCoroutine(spawnEnemy());
             on = false;
         }
-        if(transform.position ==GameManager.Instance.MapPos2[GameManager.Instance.MapPos2.Length - 1].position)
+
+        if (GameManager.Instance.stage2)
         {
-            GameManager.Instance.protecthealth -= 2;
-            Destroy(gameObject);
+            road(GameManager.Instance.stage2MapPos2);
         }
-        road(GameManager.Instance.MapPos2);
+        else
+        {
+            road(GameManager.Instance.MapPos2);
+        }
         SpeedUpTimer();
+        if(health <= 0)
+        {
+            Die();
+        }
     }
     IEnumerator spawnEnemy()
     {
         yield return new WaitForSeconds(0.2f);
-        Instantiate(Enemy1Prefab, transform.position+ pos, Quaternion.identity);
+        var enemy = Instantiate(Enemy1Prefab, transform.position+ pos, Quaternion.Euler(0, 0, 90));
+        GameManager.Instance.EnemyList.Add(enemy);
         pos = new Vector3(0, 0, pos.z + 0.5f);
         count--;
         on = true;

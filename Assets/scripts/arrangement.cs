@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class arrangement : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class arrangement : MonoBehaviour
                     UIManger.Instance.arrangementUI.spawnTransform = hit.collider.transform;
                     UIManger.Instance.arrangementUI.clickGameObject = hit.collider.gameObject;
                     UIManger.Instance.arrangementUI.isShow = true;
+                    Camera.main.GetComponent<Physics2DRaycaster>().enabled = false;
                 }
             }
         }

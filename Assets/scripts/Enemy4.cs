@@ -13,13 +13,19 @@ public class Enemy4 : EnemyBase
     private void Update()
     {
         colliders = Physics2D.OverlapCircleAll(transform.position, colliderRadius);
-        road(GameManager.Instance.MapPos1);
-        if(transform.position == GameManager.Instance.MapPos1[GameManager.Instance.MapPos1.Length - 1].position)
+        if (GameManager.Instance.stage2)
         {
-            GameManager.Instance.protecthealth -= 1;
-            Destroy(gameObject);
+            road(GameManager.Instance.stage2MapPos2);
+        }
+        else
+        {
+            road(GameManager.Instance.MapPos2);
         }
         SpeedUpTimer();
+        if(health <= 0)
+        {
+            Die();
+        }
     }
 
     public override void Die()

@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class AllDamegi : MonoBehaviour
+public class AllDamegi : itemBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject pung;
+    
+    private void Update()
     {
-        
+        click("AllDamegi");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void item()
     {
-        
+        Debug.Log("AllDamegi");
+        foreach (var enemy in GameManager.Instance.EnemyList)
+        {
+            enemy.GetComponent<EnemyBase>().health /= 2;
+        }
+        Instantiate(pung, new Vector3(0,0,0), Quaternion.identity);
+        Destroy(gameObject);
     }
 }

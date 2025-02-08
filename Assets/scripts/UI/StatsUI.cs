@@ -10,6 +10,7 @@ public class StatsUI : UIBase
     [SerializeField] public TextMeshProUGUI protecthealthText;
     [SerializeField] private TextMeshProUGUI x1Text;
     [SerializeField] public Button x1;
+    [SerializeField] private Button nextWaveButton;
 
     private void Awake()
     {
@@ -24,6 +25,10 @@ public class StatsUI : UIBase
                 Time.timeScale = 1f;
                 x1Text.text = "x1";
             }
+        });
+        nextWaveButton.onClick.AddListener(()=>
+        {
+            GameManager.Instance.wave.SkipToNextWave();
         });
     }
 
