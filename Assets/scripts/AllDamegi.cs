@@ -12,11 +12,9 @@ public class AllDamegi : itemBase
     public override void item()
     {
         Debug.Log("AllDamegi");
-        foreach (var enemy in GameManager.Instance.EnemyList)
-        {
-            enemy.GetComponent<EnemyBase>().health /= 2;
-        }
         Instantiate(pung, new Vector3(0,0,0), Quaternion.identity);
+        SoundManager.Instance.pungSource.Play();
+        UIManger.Instance.statsUI.allDamageImage.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 }

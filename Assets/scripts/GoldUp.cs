@@ -12,6 +12,8 @@ public class GoldUp : itemBase
     {
         Debug.Log("GoldUp");
         GameManager.Instance.GoldUp = true;
+        SoundManager.Instance.coinSource.Play();
+        UIManger.Instance.statsUI.goldUpImage.gameObject.SetActive(true);
         Destroy(this.gameObject);
     }
 }

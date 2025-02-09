@@ -5,7 +5,7 @@ public class GoldUpUI : UIBase
 {
     [SerializeField] private TextMeshProUGUI timetext;
     private float time = 3;
-    private float timer;
+    public float timer;
     
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class GoldUpUI : UIBase
             {
                 Hide();
                 timer = 0;
+                GameManager.Instance.itemconut--;
                 GameManager.Instance.GoldUp = false;
             }
         }

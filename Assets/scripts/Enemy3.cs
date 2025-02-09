@@ -33,5 +33,22 @@ public class Enemy3 : EnemyBase
             Die();
         }
     }
+
+    public override void Die()
+    {
+        GameObject item = items[Random.Range(0, items.Length)];
+        if (item != null && GameManager.Instance.itemconut <3)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
+        }
+
+        if (goldgive)
+        {
+            GameManager.Instance.gold += gold;
+        }
+
+        GameManager.Instance.EnemyList.Remove(gameObject);
+        Destroy(gameObject);
+    }
 }
 

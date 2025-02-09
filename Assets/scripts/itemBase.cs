@@ -10,9 +10,10 @@ public class itemBase : MonoBehaviour
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null)
             {
-                if(hit.collider.CompareTag(tag) && GameManager.Instance.isItemCoolTime == false)
+                if(hit.collider.CompareTag(tag) && GameManager.Instance.isItemCoolTime == false && GameManager.Instance.itemconut < 3)
                 {
                     item();
+                    GameManager.Instance.itemconut++;
                 }
             }
         }

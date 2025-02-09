@@ -23,6 +23,7 @@ public class TurrentBase : MonoBehaviour
             if (collider2D.gameObject.tag == "Enemy")
             {
                 var Ammo = Instantiate(target, transform.position, Quaternion.identity);
+                SoundManager.Instance.turretSource.Play();
                 Ammo.GetComponent<Ammo>().damage = damage;
                 Vector3 direction = collider2D.transform.position - Ammo.transform.position;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StatsUI : UIBase
@@ -11,6 +12,11 @@ public class StatsUI : UIBase
     [SerializeField] private TextMeshProUGUI x1Text;
     [SerializeField] public Button x1;
     [SerializeField] private Button nextWaveButton;
+    [SerializeField] private Button shopButton;
+    [SerializeField] public Image goldUpImage;
+    [SerializeField] public Image allDamageImage;
+    [SerializeField] public Image EnemySpeedImage;
+    [SerializeField] public Image healthImage;
 
     private void Awake()
     {
@@ -29,6 +35,11 @@ public class StatsUI : UIBase
         nextWaveButton.onClick.AddListener(()=>
         {
             GameManager.Instance.wave.SkipToNextWave();
+        });
+        shopButton.onClick.AddListener(() =>
+        {
+            UIManger.Instance.shopUI.Show();
+            Camera.main.GetComponent<Physics2DRaycaster>().enabled = false;
         });
     }
 

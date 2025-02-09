@@ -175,6 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c0db58693ceab4f8ce101c65f2de41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 14
+  gold: 8
+  speed: 0.002
+  defaultSpeed: 0.002
+  speedUp: 0
+  speedDown: 0
+  goldUp: 0
   items:
   - {fileID: 2684681977142239683, guid: df7eac845f824d348887046b0a1f35b6, type: 3}
   - {fileID: 2684681977142239683, guid: df7eac845f824d348887046b0a1f35b6, type: 3}
@@ -196,31 +203,3 @@ MonoBehaviour:
   - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
   - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
   - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  health: 14
-  gold: 8
-  speed: 0.002
-  defaultSpeed: 0.002
-  speedUp: 0
-  speedDown: 0
-  goldUp: 0
-  items: []

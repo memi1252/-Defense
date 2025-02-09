@@ -18,8 +18,10 @@ public class GameManager : MonoSingleton<GameManager>
     public List<GameObject> EnemyList = new List<GameObject>();
     public int gold = 0;
     public int protecthealth = 10;
+    public int itemconut = 0;
     public bool GoldUp = false;
     public bool speedStop = false;
+    public bool allDamage = false;
     
     public bool stage2 = false;
     
@@ -55,12 +57,6 @@ public class GameManager : MonoSingleton<GameManager>
             wave = FindObjectOfType<Wave>();
         }
         
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("stage2");
-            stage2 = true;
-            EnemyList.Clear();
-        }
         if (protecthealth <= 0)
         {
             Debug.Log("Game Over");
@@ -86,7 +82,9 @@ public class GameManager : MonoSingleton<GameManager>
                 {
                     enemy.GetComponent<EnemyBase>().gold /= 2;
                     enemy.GetComponent<EnemyBase>().goldUp = false;
+                    UIManger.Instance.statsUI.goldUpImage.gameObject.SetActive(false);
                     UIManger.Instance.goldUpUI.Hide();
+                    
                 }
             }
         }
@@ -102,9 +100,24 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 speedStop = false;
                 speedStopTimer = 0;
+                itemconut--;
                 foreach (var enemy in EnemyList)
                 {
                     enemy.GetComponent<EnemyBase>().speed = enemy.GetComponent<EnemyBase>().defaultSpeed;
+                    UIManger.Instance.statsUI.EnemySpeedImage.gameObject.SetActive(false);
+                    
+                }
+            }
+        }
+        
+        if(allDamage)
+        {
+            foreach (var enemy in EnemyList)
+            {
+                if(!enemy.GetComponent<EnemyBase>().allDemage)
+                {
+                    enemy.GetComponent<EnemyBase>().health /= 2;
+                    enemy.GetComponent<EnemyBase>().allDemage = true;
                 }
             }
         }

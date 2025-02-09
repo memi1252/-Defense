@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class Wave : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private GameObject[] boss;
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private int waveCount = 5;
     [SerializeField] private int enemyCount = 3;
@@ -15,7 +16,7 @@ public class Wave : MonoBehaviour
 
     public bool isWave = false;
     public int waveIndex = 0;
-
+    private bool isboss;
     private Coroutine waveCoroutine;
 
     private void Start()
@@ -25,7 +26,13 @@ public class Wave : MonoBehaviour
 
     IEnumerator waveStart()
     {
-        for (int i = 0; i < waveCount; i++)
+        if (waveIndex == waveCount - 1) // Check if it's the last wave
+        {
+            isWave = true;
+            Instantiate(boss[0], spawnPoints.position, Quaternion.Euler(0, 0, 90));
+            yield return new WaitForSeconds(waveTime[waveIndex]);
+        }
+        else
         {
             for (int j = 0; j < enemyCount; j++)
             {
@@ -41,7 +48,6 @@ public class Wave : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
 
-            yield return new WaitForSeconds(waveTime[i]);
             if (GameManager.Instance.stage2)
             {
                 enemyCount += Random.Range(4, 8);
@@ -50,43 +56,36 @@ public class Wave : MonoBehaviour
             {
                 enemyCount += Random.Range(2, 4);
             }
+            yield return new WaitForSeconds(waveTime[waveIndex]);
         }
     }
 
     private void Update()
     {
-        if (waveIndex == waveCount)
-        {
-            isWave = false;
-            Debug.Log("Game Clear");
-        }
         if (isWave)
         {
             waveTime[waveIndex] -= Time.deltaTime;
             if (waveTime[waveIndex] <= 0)
             {
-                UIManger.Instance.statsUI.WaveText.text = "Clear";
                 waveIndex++;
-                isWave = false;
+                waveCoroutine = StartCoroutine(waveStart());
             }
         }
     }
 
     public void SkipToNextWave()
     {
+        if (waveIndex >= waveCount - 1) 
+        {
+            Debug.Log("Cannot skip the last wave");
+            return;
+        }
+
         if (waveCoroutine != null)
         {
             StopCoroutine(waveCoroutine);
         }
         waveIndex++;
-        if (waveIndex < waveCount)
-        {
-            waveCoroutine = StartCoroutine(waveStart());
-        }
-        else
-        {
-            isWave = false;
-            Debug.Log("Game Clear");
-        }
+        waveCoroutine = StartCoroutine(waveStart());
     }
 }

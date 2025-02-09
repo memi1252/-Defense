@@ -22,6 +22,7 @@ public class heal : itemBase
         {
             GameManager.Instance.protecthealth += 3;
         }
+        UIManger.Instance.statsUI.healthImage.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 }

@@ -11,6 +11,7 @@ public class EnemyStop : itemBase
     {
         Debug.Log("EnemyStop");
         GameManager.Instance.speedStop = true;
+        UIManger.Instance.statsUI.EnemySpeedImage.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 }

@@ -87,6 +87,7 @@ public class SpeedDownTurret : TurrentBase
             Ammo.GetComponent<SpeedDownAmmo>().damage = damage;
             Ammo.GetComponent<SpeedDownAmmo>().speedDownpercent = speedDownpercent[level-1];
             Vector3 direction = collider2D.transform.position - Ammo.transform.position;
+            SoundManager.Instance.turretSource.Play();
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Ammo.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }

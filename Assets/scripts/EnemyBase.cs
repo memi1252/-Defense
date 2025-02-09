@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private GameObject[] items;
     
     private int currentWaypointIndex = 0;
     private float progress = 0f;
@@ -17,6 +16,9 @@ public class EnemyBase : MonoBehaviour
     public bool speedUp = false;
     public bool speedDown = false;
     public bool goldUp = false;
+    public bool allDemage = false;
+    public bool goldgive = true;
+    public bool move = true;
     
 
     public virtual void SpeedUpTimer()
@@ -35,26 +37,73 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void road(Transform[] targetWay)
     {
-        Transform targetWaypoint = targetWay[currentWaypointIndex];
-        progress += speed * Time.deltaTime / Vector3.Distance(transform.position, targetWaypoint.position);
-        transform.position = Vector3.Lerp(transform.position, targetWaypoint.position, progress); 
-
-        if (progress >= 1f) 
+        if (move)
         {
-            progress = 0f; 
-             if(targetWay == GameManager.Instance.MapPos1 && targetWaypoint ==targetWay[0])
-                transform.Rotate(0, 0, -90);
-             else if(targetWay == GameManager.Instance.MapPos1 && targetWaypoint ==targetWay[targetWay.Length-2])
-                 transform.rotation = Quaternion.Euler(0, 0, 90);
-             else if(targetWay == GameManager.Instance.MapPos1)
-                transform.Rotate(0, 0, 90);
-             else if(targetWay == GameManager.Instance.MapPos2 && targetWaypoint ==targetWay[0])
-                 transform.Rotate(0, 0, 90);
-             else if(targetWay == GameManager.Instance.MapPos2 && targetWaypoint ==targetWay[targetWay.Length-2])
-                 transform.rotation = Quaternion.Euler(0, 0, 90);
-             else if(targetWay == GameManager.Instance.MapPos2)
-                transform.Rotate(0, 0, -90);
-            currentWaypointIndex = (currentWaypointIndex + 1) % targetWay.Length;
+            Transform targetWaypoint = targetWay[currentWaypointIndex];
+            progress += speed * Time.deltaTime / Vector3.Distance(transform.position, targetWaypoint.position);
+            transform.position = Vector3.Lerp(transform.position, targetWaypoint.position, progress);
+
+            if (progress >= 1f)
+            {
+                progress = 0f;
+                if (targetWay == GameManager.Instance.MapPos1 && targetWaypoint == targetWay[0])
+                    transform.Rotate(0, 0, -90);
+                else if (targetWay == GameManager.Instance.MapPos1 && targetWaypoint == targetWay[targetWay.Length - 2])
+                    transform.rotation = Quaternion.Euler(0, 0, 90);
+                else if (targetWay == GameManager.Instance.MapPos1)
+                    transform.Rotate(0, 0, 90);
+                else if (targetWay == GameManager.Instance.MapPos2 && targetWaypoint == targetWay[0])
+                    transform.Rotate(0, 0, 90);
+                else if (targetWay == GameManager.Instance.MapPos2 && targetWaypoint == targetWay[targetWay.Length - 2])
+                    transform.rotation = Quaternion.Euler(0, 0, 90);
+                else if (targetWay == GameManager.Instance.MapPos2)
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos1 && targetWaypoint == targetWay[0])
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos1 && targetWaypoint == targetWay[1])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos1 && targetWaypoint == targetWay[2])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos1 && targetWaypoint == targetWay[3])
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos1 && targetWaypoint == targetWay[4])
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos1 && targetWaypoint == targetWay[5])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[0] && currentWaypointIndex <9)
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[1] && currentWaypointIndex <9)
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[2] && currentWaypointIndex <9)
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[3] && currentWaypointIndex <9)
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[4] && currentWaypointIndex <9)
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[5]&& currentWaypointIndex <9)
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[6] && currentWaypointIndex <9)
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[7]&& currentWaypointIndex <9)
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[8]&& currentWaypointIndex <9)
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[9])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[10])
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[11])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[12])
+                    transform.Rotate(0, 0, -90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[13])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[14])
+                    transform.Rotate(0, 0, 90);
+                else if(targetWay == GameManager.Instance.stage2MapPos2 && targetWaypoint == targetWay[15])
+                    transform.Rotate(0, 0, -90);
+                currentWaypointIndex = (currentWaypointIndex + 1) % targetWay.Length;
+            }
         }
     }
     
@@ -65,13 +114,11 @@ public class EnemyBase : MonoBehaviour
     
     public virtual void Die()
     {
-        GameManager.Instance.gold += gold;
-        GameManager.Instance.EnemyList.Remove(gameObject);
-        GameObject item = items[Random.Range(0, items.Length)];
-        if (item != null)
+        if (goldgive)
         {
-            Instantiate(item, transform.position, Quaternion.identity);
+            GameManager.Instance.gold += gold;
         }
+        GameManager.Instance.EnemyList.Remove(gameObject);
         Destroy(gameObject);
     }
     
