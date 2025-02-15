@@ -8,6 +8,7 @@ public class UIManger : MonoSingleton<UIManger>
     [SerializeField] public GoldUpUI goldUpUI;
     [SerializeField] public shopUI shopUI;
     [SerializeField] public clearUI clearUI;
+    [SerializeField] public GameOverUI gameOverUI;
 
     private void Update()
     {
@@ -25,5 +26,8 @@ public class UIManger : MonoSingleton<UIManger>
         if(clearUI == null)
             clearUI = GameObject.Find("Canvas").transform.Find("clearUI").gameObject
                 .GetComponent<clearUI>();
+        if(gameOverUI == null)
+            gameOverUI = GameObject.Find("Canvas").transform.Find("GameOverUI").gameObject
+                .GetComponent<GameOverUI>();
     }
 }

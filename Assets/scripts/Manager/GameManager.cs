@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,6 +34,10 @@ public class GameManager : MonoSingleton<GameManager>
     private int speedStoptime = 10;
     private float speedStopTimer;
 
+    public float playTime;
+    public int enemyKill;
+    
+
     public override void Awake()
     {
         base.Awake();
@@ -57,11 +62,6 @@ public class GameManager : MonoSingleton<GameManager>
             wave = FindObjectOfType<Wave>();
         }
         
-        if (protecthealth <= 0)
-        {
-            Debug.Log("Game Over");
-        }
-        
         if (GoldUp)
         {
             UIManger.Instance.goldUpUI.Show();
@@ -73,9 +73,8 @@ public class GameManager : MonoSingleton<GameManager>
                     enemy.GetComponent<EnemyBase>().goldUp = true;
                 }
             }
-        }else if (!GoldUp)
+        }else if (!GoldUp && SceneManager.GetActiveScene().name != "MainLobby")
         {
-            
             foreach (var enemy in EnemyList)
             {
                 if (enemy.GetComponent<EnemyBase>().goldUp)
@@ -83,6 +82,7 @@ public class GameManager : MonoSingleton<GameManager>
                     enemy.GetComponent<EnemyBase>().gold /= 2;
                     enemy.GetComponent<EnemyBase>().goldUp = false;
                     UIManger.Instance.statsUI.goldUpImage.gameObject.SetActive(false);
+                    itemconut--;
                     UIManger.Instance.goldUpUI.Hide();
                     
                 }
@@ -105,7 +105,7 @@ public class GameManager : MonoSingleton<GameManager>
                 {
                     enemy.GetComponent<EnemyBase>().speed = enemy.GetComponent<EnemyBase>().defaultSpeed;
                     UIManger.Instance.statsUI.EnemySpeedImage.gameObject.SetActive(false);
-                    
+                    itemconut--;
                 }
             }
         }
@@ -118,8 +118,45 @@ public class GameManager : MonoSingleton<GameManager>
                 {
                     enemy.GetComponent<EnemyBase>().health /= 2;
                     enemy.GetComponent<EnemyBase>().allDemage = true;
+                    StartCoroutine(allDamageImageHide());
                 }
             }
         }
+        
+       
+        playTime += Time.deltaTime;
+        
+        
+        if(protecthealth <= 0)
+        {
+            UIManger.Instance.gameOverUI.Show();
+            Time.timeScale = 0;
+        }
+
+        if (SceneManager.GetActiveScene().name == "MainLobby")
+        {
+            UIManger.Instance.gameOverUI.Hide();
+        }
+        
+        if(UIManger.Instance.statsUI.healthImage.gameObject.activeSelf)
+        {
+            StartCoroutine(healthImageHide());
+        }
     }
+    
+    IEnumerator allDamageImageHide()
+    {
+        yield return new WaitForSeconds(3);
+        allDamage = false;
+        itemconut--;
+        UIManger.Instance.statsUI.allDamageImage.gameObject.SetActive(false);
+    }
+
+    IEnumerator healthImageHide()
+    {
+        yield return new WaitForSeconds(3);
+        itemconut--;
+        UIManger.Instance.statsUI.healthImage.gameObject.SetActive(false);
+    }
+    
 }

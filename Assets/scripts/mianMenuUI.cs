@@ -16,6 +16,10 @@ public class mianMenuUI : MonoBehaviour
         startButton.onClick.AddListener(() =>
         {
             Debug.Log("startButton");
+            GameManager.Instance.playTime = 0;
+            Time.timeScale = 1;
+            GameManager.Instance.gold = 20;
+            GameManager.Instance.protecthealth = 10;
             SceneManager.LoadScene("stage1");
         });
         exitButton.onClick.AddListener(() =>

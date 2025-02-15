@@ -175,53 +175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132de6a8c68548e48b4078a94b28272c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 2684681977142239683, guid: df7eac845f824d348887046b0a1f35b6, type: 3}
-  - {fileID: 2684681977142239683, guid: df7eac845f824d348887046b0a1f35b6, type: 3}
-  - {fileID: 2684681977142239683, guid: df7eac845f824d348887046b0a1f35b6, type: 3}
-  - {fileID: 7381013438433454534, guid: 441c4eeaf1939564ca84df7d8c41675f, type: 3}
-  - {fileID: 7381013438433454534, guid: 441c4eeaf1939564ca84df7d8c41675f, type: 3}
-  - {fileID: 7381013438433454534, guid: 441c4eeaf1939564ca84df7d8c41675f, type: 3}
-  - {fileID: 7381013438433454534, guid: 441c4eeaf1939564ca84df7d8c41675f, type: 3}
-  - {fileID: 7381013438433454534, guid: 441c4eeaf1939564ca84df7d8c41675f, type: 3}
-  - {fileID: 7381013438433454534, guid: 441c4eeaf1939564ca84df7d8c41675f, type: 3}
-  - {fileID: 8981294768735104183, guid: 49d00943093039f4b822d65d223f24c6, type: 3}
-  - {fileID: 8981294768735104183, guid: 49d00943093039f4b822d65d223f24c6, type: 3}
-  - {fileID: 8981294768735104183, guid: 49d00943093039f4b822d65d223f24c6, type: 3}
-  - {fileID: 8981294768735104183, guid: 49d00943093039f4b822d65d223f24c6, type: 3}
-  - {fileID: 8981294768735104183, guid: 49d00943093039f4b822d65d223f24c6, type: 3}
-  - {fileID: 8981294768735104183, guid: 49d00943093039f4b822d65d223f24c6, type: 3}
-  - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
-  - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
-  - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
-  - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
-  - {fileID: 3911463996366390061, guid: e29081dd15ebc6a4f9457bf49e208d7e, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  health: 18
-  gold: 9
+  health: 20
+  gold: 4
   speed: 0.003
   defaultSpeed: 0.003
   speedUp: 0
   speedDown: 0
   goldUp: 0
+  allDemage: 0
+  goldgive: 1
+  move: 1
   colliders: []
   colliderRadius: 2

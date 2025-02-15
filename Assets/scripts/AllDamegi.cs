@@ -14,6 +14,7 @@ public class AllDamegi : itemBase
         Debug.Log("AllDamegi");
         Instantiate(pung, new Vector3(0,0,0), Quaternion.identity);
         SoundManager.Instance.pungSource.Play();
+        GameManager.Instance.allDamage = true;
         UIManger.Instance.statsUI.allDamageImage.gameObject.SetActive(true);
         Destroy(gameObject);
     }

@@ -63,6 +63,8 @@ public class cheet : MonoBehaviour
             cheetUi.SetActive(true);
             text.text = "mainLobby";
             GameManager.Instance.itemconut = 0;
+            GameManager.Instance.gold = 20;
+            GameManager.Instance.protecthealth = 10;
             GameManager.Instance.stage2 = false;
             StartCoroutine(Hide());
         }
@@ -72,8 +74,12 @@ public class cheet : MonoBehaviour
             SceneManager.LoadScene("stage1");
             cheetUi.SetActive(true);
             text.text = "stage1";
+            GameManager.Instance.playTime = 0;
+            Time.timeScale = 1;
             GameManager.Instance.itemconut = 0;
             GameManager.Instance.stage2 = false;
+            GameManager.Instance.gold = 20;
+            GameManager.Instance.protecthealth = 10;
             StartCoroutine(Hide());
         }
         else if (Input.GetKeyDown(KeyCode.F7))
@@ -81,8 +87,12 @@ public class cheet : MonoBehaviour
             GameManager.Instance.EnemyList.Clear();
             SceneManager.LoadScene("stage2");
             cheetUi.SetActive(true);
+            GameManager.Instance.playTime = 0;
+            Time.timeScale = 1;
             GameManager.Instance.itemconut = 0;
             GameManager.Instance.stage2 = true;
+            GameManager.Instance.gold = 20;
+            GameManager.Instance.protecthealth = 10;
             text.text = "stage2";
             StartCoroutine(Hide());
         }

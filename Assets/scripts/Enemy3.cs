@@ -48,6 +48,7 @@ public class Enemy3 : EnemyBase
         }
 
         GameManager.Instance.EnemyList.Remove(gameObject);
+        GameManager.Instance.enemyKill++;
         Destroy(gameObject);
     }
 }

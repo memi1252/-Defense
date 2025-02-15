@@ -13,6 +13,7 @@ public class Wave : MonoBehaviour
     [SerializeField] private int waveCount = 5;
     [SerializeField] private int enemyCount = 3;
     [SerializeField] public float[] waveTime;
+    [SerializeField] public int hpPlus = 0;
 
     public bool isWave = false;
     public int waveIndex = 0;
@@ -24,9 +25,13 @@ public class Wave : MonoBehaviour
         waveCoroutine = StartCoroutine(waveStart());
     }
 
-    IEnumerator waveStart()
+    public IEnumerator waveStart()
     {
-        if (waveIndex == waveCount - 1) // Check if it's the last wave
+        if (waveIndex == waveCount)
+        {
+            yield break;
+        }
+        if (waveIndex == waveCount - 1)
         {
             isWave = true;
             Instantiate(boss[0], spawnPoints.position, Quaternion.Euler(0, 0, 90));
@@ -34,6 +39,7 @@ public class Wave : MonoBehaviour
         }
         else
         {
+            
             for (int j = 0; j < enemyCount; j++)
             {
                 isWave = true;
@@ -41,20 +47,31 @@ public class Wave : MonoBehaviour
 
                 var enemy = Instantiate(enemies[enemyIndex], spawnPoints.position, Quaternion.Euler(0, 0, 90));
                 GameManager.Instance.EnemyList.Add(enemy);
+                enemy.GetComponent<EnemyBase>().health += hpPlus;
                 if (enemyIndex == 0)
                 {
                     enemy.GetComponent<Enemy1>().on = true;
                 }
-                yield return new WaitForSeconds(1f);
+
+                if (Time.timeScale == 1)
+                {
+                    yield return new WaitForSeconds(1f);
+                }else if (Time.timeScale == 2)
+                {
+                    yield return new WaitForSeconds(0.5f);
+                }
+                
             }
 
             if (GameManager.Instance.stage2)
             {
-                enemyCount += Random.Range(4, 8);
+                enemyCount += Random.Range(6, 12);
+                hpPlus += 7;
             }
             else
             {
-                enemyCount += Random.Range(2, 4);
+                enemyCount += Random.Range(5, 9);
+                hpPlus += 4;
             }
             yield return new WaitForSeconds(waveTime[waveIndex]);
         }

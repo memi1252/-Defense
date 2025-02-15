@@ -38,8 +38,15 @@ public class StatsUI : UIBase
         });
         shopButton.onClick.AddListener(() =>
         {
-            UIManger.Instance.shopUI.Show();
-            Camera.main.GetComponent<Physics2DRaycaster>().enabled = false;
+            if(UIManger.Instance.shopUI.gameObject.activeSelf)
+            {
+                UIManger.Instance.shopUI.Hide();
+                Camera.main.GetComponent<Physics2DRaycaster>().enabled = true;
+            }else if(!UIManger.Instance.shopUI.gameObject.activeSelf)
+            {
+                UIManger.Instance.shopUI.Show();
+                Camera.main.GetComponent<Physics2DRaycaster>().enabled = false;
+            }
         });
     }
 

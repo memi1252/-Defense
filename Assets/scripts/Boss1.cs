@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss1 : EnemyBase
 {
@@ -15,7 +16,14 @@ public class Boss1 : EnemyBase
         {
             Die();
         }
-        road(GameManager.Instance.stage2MapPos2);
+        if(SceneManager.GetActiveScene().name == "stage1")
+        {
+            road(GameManager.Instance.MapPos2);
+        }
+        else if(SceneManager.GetActiveScene().name == "stage2")
+        {
+            road(GameManager.Instance.stage2MapPos2);
+        }
     }
 
     public override void Die()

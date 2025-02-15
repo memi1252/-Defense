@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class shopUI : UIBase
     [SerializeField] private int count =1;
     [SerializeField] private int price;
     [SerializeField] private GameObject pung;
+    [SerializeField] private TextMeshProUGUI priceText;
     
     private void Awake()
     {
@@ -93,5 +95,8 @@ public class shopUI : UIBase
         {
             buyButton.interactable = false;
         }
+        
+        
+        priceText.text = $"Price: {price}";
     }
 }
